@@ -23,5 +23,9 @@
     "domain": "0.0.1",
     "express": "^4.15.4",
     "path": "^0.12.7"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
   }
 }
