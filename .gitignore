@@ -1,0 +1,13 @@
+node_modules
+start.sh
+
+# VIM
+*~
+*.swp
+npm-debug.log
+.avoscloud/
+*.xlsx
+*.orig
+.avoscloud/
+*.leancloud/
+.leanignore
