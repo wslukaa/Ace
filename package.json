@@ -1,29 +1,31 @@
 {
-  "name": "Ace",
-  "version": "1.0.0",
-  "description": "",
+  "name": "node-js-getting-started",
+  "version": "0.2.6",
+  "description": "A sample Node.js app using Express 4",
+  "engines": {
+    "node": "6.11.1"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "test": "node test.js"
   },
+  "dependencies": {
+    "ejs": "2.5.6",
+    "express": "4.15.2"
+  },
+  "devDependencies": {
+    "request": "^2.81.0",
+    "tape": "^4.7.0"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wslukaa/Ace.git"
+    "url": "https://github.com/heroku/node-js-getting-started"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/wslukaa/Ace/issues"
-  },
-  "homepage": "https://github.com/wslukaa/Ace#readme",
-  "dependencies": {
-    "body-parser": "^1.18.1",
-    "cookie-parser": "^1.4.3",
-    "domain": "0.0.1",
-    "ejs": "^2.5.7",
-    "express": "^4.15.4",
-    "path": "^0.12.7"
-  }
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
 }
