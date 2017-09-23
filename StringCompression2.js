@@ -78,6 +78,10 @@ module.exports = {
 		}
 		else
 		{
+			if (data[i] == "'"){
+				temp = temp + data[i];
+				continue;
+			}
 			if (temp != "")
 			{
 				dict [temp] = 1;
