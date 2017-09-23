@@ -6,7 +6,6 @@ const parseTime = (str) => {
   let time = a[1];
   if (time.length === 16 || time.length === 12) {
     time = '0' + time;
-    console.log('23333' + time);
   }
 
   const dateArr = date.split('-');
@@ -22,7 +21,7 @@ const parseTime = (str) => {
     const index = time.indexOf('-');
     delta = parseInt(time.substr(index + 1, 2)) + parseInt(time.substr(index + 3, 2)) / 60;
   }
-  return new Date(new Date(`${year}-${month}-${day}T${a[1].substr(0, 12)}Z`).getTime() + delta * 60 * 60000);
+  return new Date(new Date(`${year}-${month}-${day}T${time.substr(0, 12)}Z`).getTime() + delta * 60 * 60000);
 };
 
 module.exports = (req, res) => {
