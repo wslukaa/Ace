@@ -1,14 +1,10 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var math = require('mathjs');
-var hm = require ("./heistmodule")
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const math = require('mathjs');
 const _  = require('lodash');
 
 const releaseSchedule = require('./Release Schedule');
+var hm = require ("./heistmodule")
 
 const app = express();
 
