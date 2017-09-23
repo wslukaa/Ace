@@ -17,7 +17,7 @@ module.exports = {
         if (counter != 0) {output += counter.toString ();}
         output += last;
         last = data[i];
-        counter = 0;
+        counter = 1;
       }
     }
 
@@ -43,12 +43,14 @@ module.exports = {
       else{
         // console.log (key);
         dict [key] = 1;
+        console.log ("Key: " + key);
         count += 1;
-        console.log (P);
-        P = data[i];
+        console.log ("P: " + P);
+        if (i < data.length) {P = data[i];} else {P = ""};
       }
     }
-    var len = (count + 1) * 12;
+    if (P != "") {count += 1;}
+    var len = (count) * 12;
     res.end (len.toString())
   }
 };
