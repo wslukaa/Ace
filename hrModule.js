@@ -23,8 +23,8 @@ exports.result = function (input){
 	maxPlacing = 0;
 	minPlacing = 200;
 
-	data = input.data;
-	// data = input;
+	// data = input.data;
+	data = input;
 	for (var i in data){
 		entry = data[i];
 
