@@ -63,7 +63,7 @@ module.exports = {
   WDE: (req, res) => {
 	const input = req.body;
 	var data = input.data;
-	// console.log (data);
+	console.log (data);
 	
 	var dict = {};
 	var dict_counter = 0;
