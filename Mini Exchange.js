@@ -5,7 +5,16 @@ const runId = '123cddb0-cc63-4d67-8c2d-e8db5940a60d';
 
 const dealWithMessages = (messages) => {
   messages.sort((A, B) => A.messageId - B.messageId);
-  return [];
+  return [{
+    "orderId": "order-1",
+    "quantity": 1000,
+    "symbol": "0005.HK",
+    "side": "B",
+    "price": 74.9,
+    "openQuantity": 1000,
+    "state": "LIVE",
+    "fills": [],
+  }];
 };
 
 module.exports = (req, res) => {
