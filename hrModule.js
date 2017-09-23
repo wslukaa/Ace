@@ -1,5 +1,7 @@
 exports.result = function (input){
 	
+	console.log (input);
+	return {};
 	res = {};
 	
 	q1Storage = {
