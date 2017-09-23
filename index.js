@@ -13,6 +13,8 @@ const stringCompression = require('./String Compression');
 
 const calculateEmptyArea = require('./Calculate Empty Area');
 
+const warehouseKeeper = require('./Warehouse keeper');
+
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -66,3 +68,5 @@ app.post('/stringcompression/LZW', stringCompression.LZW);
 app.post('/stringcompression/WDE', stringCompression.WDE);
 
 app.post('/calculateemptyarea', calculateEmptyArea);
+
+app.post('/warehouse-keeper/game-start', warehouseKeeper);
