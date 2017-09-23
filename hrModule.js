@@ -1,5 +1,7 @@
 exports.result = function (input){
 	
+	console.log (input);
+	return {};
 	res = {};
 	
 	q1Storage = {
@@ -322,15 +324,19 @@ exports.result = function (input){
 
 				temparr = [];
 				temparr.push (raceno);
-				console.log (keys [i+1]);
+				console.log ("325" + keys [i+1]);
 				temparr.push (keys [i+1]);
-				console.log (keys [i+2]);
+				console.log ("327" + keys [i+2]);
 				temparr.push (keys [i+2]);
 
 				obj ["races"] = temparr;
 			}
 
 			res ["q3"].push (obj);
+		}
+		else
+		{
+			console.log ("337");
 		}
 	}
 
