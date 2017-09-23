@@ -29,7 +29,7 @@ module.exports = (req, res) => {
   const start = parseTime(a[1]).getTime();
   const end = parseTime(a[2]).getTime();
   const times = [];
-  console.log(start, end);
+  console.log(n, start, end);
   times.push(start);
   times.push(end);
   for (let i = 1; i <= n; i += 1) {
