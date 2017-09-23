@@ -61,6 +61,9 @@ module.exports = (req, res) => {
       res.json(Math.round((s - Math.PI * c.r * c.r) * 100) / 100);
       return;
     }
+    if (x = x0 && y =y0 &&c.y1<=y1&&c.x1<=x1||  x = x0 && y=y1&&c.x1<=x1&&c.y0>=y0  || x=x1 && y=y0 && c.x0>=x0&&c.y1<=y1||c.y0>=y0&&c.x0>=x0&& x=x1 && y=y1){
+        res.json(Math.round((s - Math.PI * c.r * c.r/4) * 100) / 100);
+    return;
   }
 
   res.json(s);
