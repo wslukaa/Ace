@@ -3,7 +3,14 @@ var bodyParser = require('body-parser');
 var math = require('mathjs');
 var hm = require ("./heistmodule")
 
-var app = express();
+const express = require('express');
+const bodyParser = require('body-parser');
+const math = require('mathjs');
+const _  = require('lodash');
+
+const releaseSchedule = require('./Release Schedule');
+
+const app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -39,3 +46,4 @@ app.post('/determinant', function(req, res) {
 app.post('/heist', function (req, res){
 	res.json (hm.grab (req.body));
 });
+app.post('/releaseSchedule', releaseSchedule);
