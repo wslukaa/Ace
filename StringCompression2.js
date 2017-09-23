@@ -14,14 +14,14 @@ module.exports = {
         counter ++;
       }
       else{
-        if (counter != 0) {output += counter.toString ();}
+        if (counter > 1) {output += counter.toString ();}
         output += last;
         last = data[i];
         counter = 1;
       }
     }
 
-    output += counter.toString ();
+    if (counter > 1) output += counter.toString ();
     output += last;
 
     console.log (output);
@@ -31,7 +31,7 @@ module.exports = {
   LZW: (req, res) => {
     const input = req.body;
     data = input.data;
-    dict = {};
+    var dict = {};
     P = "";
     P = data [0];
     count = 0;
@@ -52,5 +52,6 @@ module.exports = {
     if (P != "") {count += 1;}
     var len = (count) * 12;
     res.end (len.toString())
+    dict = {};
   }
 };
