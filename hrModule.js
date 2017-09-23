@@ -10,6 +10,11 @@ exports.result = function (input){
 
 	q2Storage = {};
 
+	q3Storage = {
+		jockey_G: {},
+		raceno_G: {}
+	};
+
 	msg = ""
 
 	data = input.data;
@@ -22,6 +27,7 @@ exports.result = function (input){
 		horse = entry.Horse;
 		jockey = entry.jockeycode;
 		trainer = entry.Trainer;
+		raceno = entry.raceno;
 		combo = horse + "," + jockey + "," + trainer;
 
 		switch (place){
@@ -43,6 +49,9 @@ exports.result = function (input){
 				break;
 
 		}
+
+		q3Storage.raceno_G [raceno] = (horse in q3Storage.raceno_G ? q3Storage.raceno_G [raceno] + 1 : 1);	
+		q3Storage.jockey_G [jockey] = (horse in q3Storage.jockey_G ? q3Storage.jockey_G [jockey] + 1 : 1);	
 	}
 
 //  ------------------ Q1 Post Processing -------------------
@@ -104,6 +113,18 @@ exports.result = function (input){
 	};
 
 //  ------------------ Q3 Post Processing -------------------
+
+	jockeyCount = 0;
+	raceCount = 0;
+
+	for (var i in q3Storage.jockey_G){
+		jockeyCount ++;
+	}
+	for (var i in q3Storage.raceno_G){
+		raceCount ++;
+	}
+
+	console.log (jockeyCount + " " + raceCount);
 
 	res ["msg"] = msg;
 
