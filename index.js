@@ -3,6 +3,8 @@ const bodyParser = require('body-parser');
 const math = require('mathjs');
 const _  = require('lodash');
 
+const sort = require('./sort');
+
 const releaseSchedule = require('./Release Schedule');
 
 const stringCompression = require('./String Compression');
@@ -37,6 +39,8 @@ app.post('/test', function(req, res) {
     aa: 233,
   });
 });
+
+app.post('/sort', sort);
 
 app.post('/releaseSchedule', releaseSchedule);
 

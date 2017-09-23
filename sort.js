@@ -1,4 +1,6 @@
-module.exports = function sortResults(prop, asc) {
+module.exports = function(req, res) {
+  var input = req.body;
+  var people = input;
   people = people.sort(function(a, b) {
       if (asc) {
           return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
@@ -7,4 +9,5 @@ module.exports = function sortResults(prop, asc) {
       }
   });
   showResults();
+  res.json();
 }
