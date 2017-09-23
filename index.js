@@ -7,7 +7,7 @@ const sort = require('./Sorting');
 const trainPlanner =require('./trainPlanner');
 const releaseSchedule = require('./Release Schedule');
 const hm = require ("./heistmodule")
-const hr = require ('./hrModule')
+const hr = require ('./hrModule2')
 
 const stringCompression = require('./String Compression');
 
