@@ -62,11 +62,11 @@ module.exports = {
       wordN += 1;
     }
     console.log("WDE compression started for " + wordN + " words");
-    let ret = wordN * 12;
-    _.each(lib, (a, word) => {
-      console.log(word);
-      ret += word.length * 8;
-    });
+    let ret = "response";//wordN * 12;
+    // _.each(lib, (a, word) => {
+    //   console.log(word);
+    //   ret += word.length * 8;
+    // });
     console.log("WDE compression finished");
     res.json(ret);
   },
