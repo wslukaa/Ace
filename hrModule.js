@@ -334,9 +334,9 @@ exports.result = function (input){
 	for (var i in res["q3"]){
 		var obj = res["q3"][i];
 		console.log ("jockeys");
-		console.log (obj.[jockeys].toString());
+		console.log (obj[jockeys].toString());
 		console.log ("races");
-		console.log (obj.[races].toString());
+		console.log (obj[races].toString());
 
 	}
 
