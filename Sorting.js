@@ -11,7 +11,7 @@ module.exports = function(req, res) {
     a[number] += 1;
   });
   const ret = [];
-  for (let i = -1000; i <= 1000; i += 1) {
+  for (let i = -10000; i <= 10000; i += 1) {
     if (a[i]) {
       for (let j = 0; j < a[i]; j += 1) ret.push(i);
     }
