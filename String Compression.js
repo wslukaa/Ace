@@ -38,6 +38,7 @@ module.exports = {
     res.json(12 * ret);
   },
   WDE: (req, res) => {
+    console.log("WDE endpoint called");
     const input = req.body;
     const { data } = input;
     const lib = {};
@@ -60,12 +61,13 @@ module.exports = {
       lib[p] = true;
       wordN += 1;
     }
-    console.log(wordN);
+    console.log("WDE compression started for " + wordN + " words");
     let ret = wordN * 12;
     _.each(lib, (a, word) => {
       console.log(word);
       ret += word.length * 8;
     });
+    console.log("WDE compression finished");
     res.json(ret);
   },
 };
