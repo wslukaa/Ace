@@ -16,12 +16,11 @@ const app = express();
 app.set('port', (process.env.PORT || 5000));
 
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.json());
+app.use(bodyParser.json({
+  limit: '50mb',
+}));
 app.use(bodyParser.urlencoded({
   extended: true,
-}));
-app.use(bodyParser.raw({
-  limit: '50mb',
 }));
 
 // views is directory for all template files
