@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var math = require('mathjs');
+var hm = require ("./heistmodule")
 
 var app = express();
 
@@ -33,4 +34,8 @@ app.post('/test', function(req, res) {
 app.post('/determinant', function(req, res) {
   let matrix = math.matrix(req.body);
   res.json(math.det(matrix));
+});
+
+app.post('/heist', function (req, res){
+	res.json (hm.grab (req.body));
 });
