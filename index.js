@@ -4,7 +4,8 @@ const math = require('mathjs');
 const _  = require('lodash');
 
 const releaseSchedule = require('./Release Schedule');
-var hm = require ("./heistmodule")
+const hm = require ("./heistmodule")
+const hr = require ('./hrModule')
 
 const app = express();
 
@@ -43,3 +44,7 @@ app.post('/heist', function (req, res){
 	res.json (hm.grab (req.body));
 });
 app.post('/releaseSchedule', releaseSchedule);
+
+app.post('/horse-racing', function (req, res){
+	res.json (hr.result (req.body));
+});
