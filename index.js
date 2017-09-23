@@ -70,7 +70,7 @@ app.post('/releaseSchedule', releaseSchedule);
 // app.post('/stringcompression/RLE', stringCompression.RLE);
 app.post('/stringcompression/RLE', stringComp.RLE);
 app.post('/stringcompression/LZW', stringComp.LZW);
-app.post('/stringcompression/WDE', stringCompression.WDE);
+app.post('/stringcompression/WDE', stringComp.WDE);
 
 app.post('/calculateemptyarea', calculateEmptyArea);
 
