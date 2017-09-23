@@ -45,17 +45,17 @@ module.exports = {
       }
       else{
         // console.log (key);
-        if (dict_counter <= 4095-256+1){
+        // if (dict_counter <= 4095-256+1){
           dict [key] = 1;
           dict_counter += 1;
-        }
+        // }
         console.log ("Key: " + key);
         count += 1;
         console.log ("P: " + P);
         P = data[i];
       }
     }
-    count += 1;
+    // count += 1;
     var len = (count) * 12;
     res.end (len.toString())
     dict = {};

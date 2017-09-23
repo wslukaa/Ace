@@ -61,7 +61,12 @@ module.exports = (req, res) => {
       res.json(Math.round((s - Math.PI * c.r * c.r) * 100) / 100);
       return;
     }
-   
+
 
   res.json(s);
+<<<<<<< HEAD
 };}
+=======
+};
+}
+>>>>>>> c93d60c397c4337ecd3ec3de8d439379988f32a0
