@@ -27,7 +27,7 @@ exports.result = function (input){
 		horse = entry.Horse;
 		jockey = entry.jockeycode;
 		trainer = entry.Trainer;
-		raceno = entry.raceno;
+		raceno = entry.racedate + ":" + entry.raceno;
 		combo = horse + "," + jockey + "," + trainer;
 
 		switch (place){
@@ -50,8 +50,8 @@ exports.result = function (input){
 
 		}
 
-		q3Storage.raceno_G [raceno] = (horse in q3Storage.raceno_G ? q3Storage.raceno_G [raceno] + 1 : 1);	
-		q3Storage.jockey_G [jockey] = (horse in q3Storage.jockey_G ? q3Storage.jockey_G [jockey] + 1 : 1);	
+		q3Storage.raceno_G [raceno] = (raceno in q3Storage.raceno_G ? q3Storage.raceno_G [raceno] + 1 : 1);	
+		q3Storage.jockey_G [jockey] = (jockey in q3Storage.jockey_G ? q3Storage.jockey_G [jockey] + 1 : 1);	
 	}
 
 //  ------------------ Q1 Post Processing -------------------
