@@ -32,9 +32,11 @@ module.exports = {
     const input = req.body;
     data = input.data;
     var dict = {};
+
     P = "";
     P = data [0];
     count = 0;
+
     for (var i = 1; i < data.length; i ++){
       key = P + data[i];
       if (key in dict){
@@ -46,10 +48,10 @@ module.exports = {
         console.log ("Key: " + key);
         count += 1;
         console.log ("P: " + P);
-        if (i < data.length) {P = data[i];} else {P = ""};
+        P = data[i];
       }
     }
-    if (P != "") {count += 1;}
+    count += 1;
     var len = (count) * 12;
     res.end (len.toString())
     dict = {};
