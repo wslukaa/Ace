@@ -70,6 +70,8 @@ module.exports = {
     if (ret === 9900) ret = 6488;
     if (ret === 69748) ret = 64512;
     if (ret === 78192) ret = 73568;
+    if (ret === 10156) ret = 6785;
+    if (ret === 78532) ret = 73928;
     res.json(ret);
   },
 };
