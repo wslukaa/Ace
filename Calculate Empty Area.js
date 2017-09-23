@@ -43,5 +43,25 @@ module.exports = (req, res) => {
     }
   }
 
+  if (circle) {
+    const c = {
+      x: circle.center.X,
+      y: circle.center.Y,
+      r: circle.radius,
+    };
+    c.x0 = c.x - c.r;
+    c.x1 = c.x + c.r;
+    c.y0 = c.y - c.r;
+    c.y1 = c.y + c.r;
+    if (c.x1 <= x0 || c.x0 >= x1 || c.y1 <= y0 || c.y0 >= y1) {
+      res.json(s);
+      return;
+    }
+    if (c.x0 >= x0 && c.x1 <= x1 && c.y0 >= y0 && c.y1 <= y1) {
+      res.json(Math.round((s - Math.PI * c.r * c.r) * 100) / 100);
+      return;
+    }
+  }
+
   res.json(s);
 };
