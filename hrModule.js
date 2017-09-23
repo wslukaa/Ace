@@ -119,13 +119,15 @@ exports.result = function (input){
 
 	for (var i in q3Storage.jockey_G){
 		jockeyCount ++;
+		var tempmsg = i + ": " + q3Storage.jockey_G[i].toString() + ";";
+		msg += tempmsg;
 	}
 	for (var i in q3Storage.raceno_G){
 		raceCount ++;
 	}
 
 	console.log (jockeyCount + " " + raceCount);
-	console.log (q3Storage.jockey_G.toString());
+	console.log (msg);
 
 	res ["msg"] = msg;
 
