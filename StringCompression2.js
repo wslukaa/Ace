@@ -67,26 +67,35 @@ module.exports = {
 	var dict = {};
 	var dict_counter = 0;
 	var count = 0;
-
+	var temp = ""
 
 	for (var i = 0; i < data.length; i ++){
-		temp = ""
-		var charCode = data.length.charCodeAt (i);
+		var charCode = data.charCodeAt (i);
 		if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123)){
 			temp = temp + data[i];
 		}
 		else
 		{
-			count ++;
+			console.log ("81");
 			dict [temp] = 1;
 			if (temp != "")
 			{
 				temp = "";
+				console.log ("85");
 				count ++;
 			}
+			count ++;
 		}
 	}
 
+	if (temp != "")
+	{
+		temp = "";
+		console.log ("85");
+		count ++;
+	}
+
+	console.log (count);
 	count *= 12;
 
 	for (var i in dict){
