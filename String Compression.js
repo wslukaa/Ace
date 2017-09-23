@@ -35,7 +35,7 @@ module.exports = {
         p = c;
       }
     }
-    res.json(12 * ret);
+    res.json(12 * ret - 12);
   },
   WDE: (req, res) => {
     const input = req.body;
