@@ -4,7 +4,7 @@ const math = require('mathjs');
 const _  = require('lodash');
 
 const sort = require('./Sorting');
-
+const trainPlanner =require('./trainPlanner');
 const releaseSchedule = require('./Release Schedule');
 const hm = require ("./heistmodule")
 const hr = require ('./hrModule')
@@ -58,7 +58,7 @@ app.post('/releaseSchedule', releaseSchedule);
 app.post('/horse-racing', function (req, res){
 	res.json (hr.result (req.body));
 });
-
+app.post('/trainPlanner',trainPlanner);
 app.post('/sort', sort);
 
 app.post('/releaseSchedule', releaseSchedule);
