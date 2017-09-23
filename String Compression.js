@@ -60,10 +60,8 @@ module.exports = {
       lib[p] = true;
       wordN += 1;
     }
-    console.log(wordN);
     let ret = wordN * 12;
     _.each(lib, (a, word) => {
-      console.log(word);
       ret += word.length * 8;
     });
     res.json(ret);
