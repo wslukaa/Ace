@@ -3,6 +3,8 @@ const _ = require('lodash');
 module.exports = function(req, res) {
   var numbers = req.body;
 
+  console.log(numbers.length);
+
   const a = [];
   _.each(numbers, (number) => {
     if (!a[number]) a[number] = 0;
