@@ -310,6 +310,7 @@ exports.result = function (input){
 			for (var j = 0; j < candidates [raceno].length; j++){
 
 				var s = candidates [raceno][j];
+				console.log (s);
 				var arr = s.split (",");
 				var temparr = [];
 
@@ -321,7 +322,9 @@ exports.result = function (input){
 
 				temparr = [];
 				temparr.push (raceno);
+				console.log (keys [i+1]);
 				temparr.push (keys [i+1]);
+				console.log (keys [i+2]);
 				temparr.push (keys [i+2]);
 
 				obj ["races"] = temparr;
