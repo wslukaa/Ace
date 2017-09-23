@@ -18,6 +18,7 @@ const dealWithMessages = (messages) => {
 };
 
 module.exports = (req, res) => {
+  console.log(req.body, typeof req.body);
   let messages = [{
     messageId: 1,
     messageType: 'SOD',
@@ -40,10 +41,10 @@ module.exports = (req, res) => {
   const result = dealWithMessages(messages);
   fetch('https://cis2017-mini-exchange.herokuapp.com/evaluate/result', {
     method: 'POST',
-    body: {
+    body: JSON.stringify({
       runId,
       result,
-    },
+    }),
   })
   .then(result => result.text())
   .then((result) => {
