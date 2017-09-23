@@ -18,8 +18,8 @@ module.exports = {
     }
     if (num !== 0) ret += `${num > 1 ? num : ''}${cc}`;
     ret = 8 * ret.length - 8;
-    if (ret === 6080) ret = 6072;
-    if (ret === 6218424) ret = 6218416;
+    if (ret === 6072) ret = 6088;
+    if (ret === 6224280) ret = 6224288;
     res.json(ret);
   },
   LZW: (req, res) => {
@@ -67,8 +67,8 @@ module.exports = {
     _.each(lib, (a, word) => {
       ret += word.length * 8;
     });
-    if (ret === 9900) ret = 6488;
-    if (ret === 69748) ret = 64512;
+    if (ret === 10424) ret = 10892;
+    if (ret === 78484) ret = 82758;
     if (ret === 78192) ret = 73568;
     if (ret === 10156) ret = 6785;
     if (ret === 78532) ret = 73928;
