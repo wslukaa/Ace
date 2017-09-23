@@ -26,18 +26,23 @@ module.exports = (req, res) => {
   const a = input[0].split(';');
   const tasks = [];
   const n = parseInt(a[0]);
+  const start = parseTime(a[1]).getTime();
+  const end = parseTime(a[2]).getTime();
   const times = [];
-  times.push(parseTime(a[1]).getTime());
-  times.push(parseTime(a[2]).getTime());
+  times.push(start);
+  times.push(end);
   for (let i = 1; i <= n; i += 1) {
     const b = input[i].split(';');
-    tasks.push({
+    const aa = {
       name: b[0],
       start: parseTime(b[1]).getTime(),
       end: parseTime(b[2]).getTime(),
-    })
-    times.push(tasks[tasks.length - 1].start);
-    times.push(tasks[tasks.length - 1].end);
+    };
+    tasks.push(aa);
+    if (aa.start < end && aa.end > start && aa.start < aa.end) {
+      times.push(aa.start);
+      times.push(aa.end);
+    }
   }
   times.sort((A, B) => A - B);
 
@@ -58,8 +63,6 @@ module.exports = (req, res) => {
       }
     }
   })
-
-  console.log(max);
 
   res.json(`${Math.floor(max / 1000)}`);
 };
