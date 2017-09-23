@@ -5,6 +5,8 @@ const _  = require('lodash');
 
 const releaseSchedule = require('./Release Schedule');
 
+const stringCompression = require('./String Compression');
+
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -34,3 +36,7 @@ app.post('/test', function(req, res) {
 });
 
 app.post('/releaseSchedule', releaseSchedule);
+
+app.post('/stringcompression/RLE', stringCompression.RLE);
+app.post('/stringcompression/LZW', stringCompression.LZW);
+app.post('/stringcompression/WDE', stringCompression.WDE);
