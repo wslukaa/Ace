@@ -302,5 +302,34 @@ exports.result = function (input){
 
 	// stage 3 completed
 
-	return candidates;
+	res ["q3"] = [];
+	for (var i = 0; i < keys.length - 2; i++){
+		raceno = keys[i];
+		var obj = {};
+		if (candidates [raceno].length != 0){
+			for (var j = 0; j < candidates [raceno].length; j++){
+
+				var s = candidates [raceno][j];
+				var arr = s.split (",");
+				var temparr = [];
+
+				for (k in arr){
+					temparr.push (jockeyRevDict [arr[k]]);
+				}
+
+				obj ["jockeys"] = temparr;
+
+				temparr = [];
+				temparr.push (raceno);
+				temparr.push (keys [i+1]);
+				temparr.push (keys [i+2]);
+
+				obj ["races"] = temparr;
+			}
+
+			res ["q3"].push (obj);
+		}
+	}
+
+	return res;
 };
