@@ -17,7 +17,7 @@ module.exports = {
       num += 1;
     }
     if (num !== 0) ret += `${num > 1 ? num : ''}${cc}`;
-    res.json(8 * ret.length);
+    res.json(8 * ret.length - 8);
   },
   LZW: (req, res) => {
     const input = req.body;
