@@ -16,17 +16,18 @@ module.exports = (req, res) => {
   const s = container.width * container.height;
 
   if (rectangle || square) {
-    const r = {
-      x0: rectangle.coordinate.X,
-      y0: rectangle.coordinate.Y,
-    };
+    const r = {};
     if (rectangle) {
+      r.x0 = rectangle.coordinate.X;
+      r.y0 = rectangle.coordinate.Y;
       r.x1 = r.x0 + rectangle.width;
       r.y1 = r.y0 + rectangle.height;
       r.s = rectangle.width * rectangle.height;
     } else {
+      r.x0 = square.coordinate.X;
+      r.y0 = square.coordinate.Y;
       r.x1 = r.x0 + square.width;
-      r.y0 = r.y0 + square.width;
+      r.y1 = r.y0 + square.width;
       r.s = square.width * square.width;
     }
     const minX = Math.max(x0, r.x0);
