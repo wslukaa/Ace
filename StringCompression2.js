@@ -63,12 +63,13 @@ module.exports = {
   WDE: (req, res) => {
 	const input = req.body;
 	var data = input.data;
-	console.log (data);
+	// console.log (data);
 	
 	var dict = {};
 	var dict_counter = 0;
 	var count = 0;
-	var temp = ""
+	var temp = "";
+	var outputSym = ""
 
 	for (var i = 0; i < data.length; i ++){
 		var charCode = data.charCodeAt (i);
@@ -77,13 +78,15 @@ module.exports = {
 		}
 		else
 		{
-			dict [temp] = 1;
 			if (temp != "")
 			{
+				dict [temp] = 1;
 				temp = "";
 				count ++;
+				outputSym += ".";
 			}
 			count ++;
+			outputSym += data [i];
 		}
 	}
 
@@ -91,13 +94,18 @@ module.exports = {
 	{
 		temp = "";
 		count ++;
+		outputSym += ".";
 	}
 
 	count *= 12;
+	console.log (outputSym);
+	outputSym = "";
 
 	for (var i in dict){
 		count += i.length * 8;
+		outputSym = outputSym + i + "; ";
 	}
+	console.log (outputSym);
 	res.end (count.toString ());
 	dict = {};
   }
