@@ -58,9 +58,9 @@ app.post('/releaseSchedule', releaseSchedule);
 var storage = ""
 app.post('/horse-racing', function (req, res){
 	if (storage == ""){
-		strorage = req.body;
+		storage = req.body;
 	}
-	// res.json (hr.result (req.body));
+	res.json (hr.result (req.body));
 });
 
 app.post ('/gettingData', function (req, res){
