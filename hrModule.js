@@ -24,8 +24,11 @@ exports.result = function (input){
 	minPlacing = 200;
 
 	data = input.data;
+	console.log (data.length);
 	// data = input;
+	var counter = 0;
 	for (var i in data){
+		counter ++;
 		entry = data[i];
 
 		place = parseInt (entry.Placing);
@@ -39,6 +42,13 @@ exports.result = function (input){
 		jockey = entry.jockeycode;
 		trainer = entry.Trainer;
 		combo = horse + "," + jockey + "," + trainer;
+
+
+		raceno = entry.racedate + ":" + entry.raceno;
+		if (raceno == "2015-12-13:7")
+		{
+			console.log (parseInt (entry.Placing));
+		}
 
 		switch (place){
 
@@ -63,6 +73,8 @@ exports.result = function (input){
 		q3Storage.jockey_G [jockey] = (jockey in q3Storage.jockey_G ? q3Storage.jockey_G [jockey] + 1 : 1);
 	}
 
+	console.log (counter);
+
 	//  ------------------ PreProcessing Part 2 -------------------
 
 	var counter = 0;
@@ -74,6 +86,7 @@ exports.result = function (input){
 
 	//  ------------------ PreProcessing Part 3 -------------------
 
+	var counter = 0;
 	for (var i in data){
 		entry = data [i];
 		raceno = entry.racedate + ":" + entry.raceno;
@@ -84,15 +97,28 @@ exports.result = function (input){
 		// if (parseInt (entry.racedate.substring (0,4)) > 2016 && parseInt (entry.racedate.substring (5, 7)) > 11){
 		// 	console.log (entry.racedate + ":" + entry.Placing);
 		// }
-		
-		if (raceno in q3Storage.raceno_G){
-			q3Storage.raceno_G [raceno][rank] = id;
-		}
-		else{
+
+		if (! (raceno in q3Storage.raceno_G)){
 			q3Storage.raceno_G [raceno] = {};
-			q3Storage.raceno_G [raceno][rank] = id;
+		}
+
+		if (! (rank in q3Storage.raceno_G [raceno]))
+		{
+			q3Storage.raceno_G [raceno][rank] = [];
+		}
+		
+		q3Storage.raceno_G [raceno][rank].push (id);
+			
+	}
+	console.log ("110: " + counter);
+
+	var counter = 0;
+	for (var raceno in q3Storage.raceno_G){
+		for (var rank in q3Storage.raceno_G[raceno]){
+			counter += q3Storage.raceno_G[raceno][rank].length;
 		}
 	}
+	console.log ("118: " + counter);
 
 //  ------------------ Q1 Post Processing -------------------
 
@@ -212,6 +238,25 @@ exports.result = function (input){
 	// 	// console.log (i + ":" + s + ";");
 	// }
 
+	var counter = 0;
+	var candidates = {};
+	for (var i = 0; i < keys.length; i++){
+		raceno = keys [i];
+		candidates [raceno] = [];
+		for (var j = minPlacing; j <= maxPlacing; j++){
+			if (j in q3Storage.raceno_G [raceno]){
+				candidates[raceno].push (j + ":" + q3Storage.raceno_G [raceno][j]);
+				counter ++;
+			}
+		}
+	}
+	console.log (minPlacing);
+	console.log (maxPlacing);
+	console.log ("235" + ":" + counter);
+
+
+
+
 //  ------------------ Q3 Post Processing -------------------
 
 	// console.log (keys.length);
@@ -223,13 +268,29 @@ exports.result = function (input){
 		candidates [raceno] = [];
 		for (var j = minPlacing; j < maxPlacing - 2; j++){
 			if (j in q3Storage.raceno_G [raceno] && j+1 in q3Storage.raceno_G [raceno] && j+2 in q3Storage.raceno_G [raceno]){
-				var cand = q3Storage.raceno_G [raceno][j] + "," + q3Storage.raceno_G [raceno][j + 1] + "," +q3Storage.raceno_G [raceno][j + 2];
-				candidates [raceno].push (cand);
-
+				
+				for (var counter1 in q3Storage.raceno_G [raceno][j]){
+					for (var counter2 in q3Storage.raceno_G [raceno][j + 1]){
+						for (var counter3 in q3Storage.raceno_G [raceno][j + 2]){
+							var cand = q3Storage.raceno_G [raceno][j][counter1] + "," + q3Storage.raceno_G [raceno][j + 1][counter2] + "," +q3Storage.raceno_G [raceno][j + 2][counter3];
+							candidates [raceno].push (cand);
+						}
+					}
+				}
 			}
 		}
 	}
 
+	var counter = 0;
+	for (var i in candidates){
+		for (var j in candidates [i]){
+			counter ++;
+
+		}
+	}
+
+
+	console.log ("289: ", counter);
 
 	// console.log (counter);
 	// var counter = 0;
@@ -256,7 +317,6 @@ exports.result = function (input){
 	// }
 
 	//stage 1 completed
-	// return candidates;
 
 	for (var i = 0; i < keys.length-1; i++){
 		raceno = keys [i];
@@ -333,10 +393,6 @@ exports.result = function (input){
 			}
 
 			res ["q3"].push (obj);
-		}
-		else
-		{
-			console.log ("337");
 		}
 	}
 

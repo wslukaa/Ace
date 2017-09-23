@@ -1,55 +1,65 @@
-var express = require('express');
-var router = express.Router();
+module.exports = function(req, res, next) {
+	// Input variables
+	var stations = req.body.stations;
+	var destination = req.body.destination;
 
-router.post(exports.trainPlanner=function(req, res, next) {
-  
-  	// Input variables
-  	var stations = req.body.stations;
-  	var destination = req.body.destination;
+	// Error checking
 
-  	// Error checking
+	// Helper functions
+	// look up the station in the stations list
+	stations.getStationByName = (name) => stations.find((station) => (station.name == name));
 
-  	// TODO: Return the shortest path from source to destination
-  	stations.pathSearch = (source, destination) => {
-  		return [];
-  	}
+	stations.pathSearch = (source, destination, visited = []) => {
+		if(source == destination) {
+			return visited;
+		} else {
+			// Only consider unvisited station
+			const connections = stations.getStationByName(source).connections.filter((connection) => visited.indexOf(connection.station) == -1);
+			const routes = connections.map((connection) => stations.pathSearch(connection.station, destination, [].concat(visited, [source]))).filter((route) => route.length != 0);
+			console.log(source, destination, routes);
 
-  	stations.getStationByName = (name) => stations.find((station) => (station.name == name));
+			// choose the shortest path
+			if(routes.length == 0) {
+				return [];
+			} else {
+				return routes.reduce((acc, cur) => cur.length < acc.length ? cur : acc);
+			}
+		}
+	}
 
-  	// Initialize passengers on train count
-  	stations.forEach((station) => {
-  		station.totalNumOfPassengers = 0;
-  	});
 
-  	// Accumulate passengers on train
-  	stations.forEach((station) => {
-  		if(station.name != req.body.destination) {
-  			stations.pathSearch(station, destination).forEach((stop) => {
-  				stop.totalNumOfPassengers += station.passengers;
-  			});
-  		}
-  	})
+	// Initialize passengers on train count
+	stations.forEach((station) => {
+		station.totalNumOfPassengers = 0;
+	});
 
-  	// Look up the connections in destination
-  	var busiestConnection = undefined;
+	// Accumulate passengers on train
+	stations.forEach((station) => {
+		if(station.name != req.body.destination) {
+			stations.pathSearch(station.name, destination).forEach((stop) => {
+				stations.getStationByName(stop).totalNumOfPassengers += station.passengers;
+			});
+		}
+	})
 
-  	stations.getStationByName(destination).connections.forEach((connection) => {
-  		const previousStation = stations.getStationByName(connection.station);
-  		if(busiestConnection == undefined || previousStation.totalNumOfPassengers > busiestConnection.totalNumOfPassengers) {
-  			busiestConnection = connection;
-  			busiestConnection.totalNumOfPassengers = previousStation.totalNumOfPassengers;
-  		}
-  	});
+	// Look up the connections and find the previous station with the most people on train
+	var busiestConnection = undefined;
+	stations.getStationByName(destination).connections.forEach((connection) => {
+		const previousStation = stations.getStationByName(connection.station);
+		if(busiestConnection == undefined || previousStation.totalNumOfPassengers > busiestConnection.totalNumOfPassengers) {
+			busiestConnection = connection;
+			busiestConnection.totalNumOfPassengers = previousStation.totalNumOfPassengers;
+		}
+	});
 
-  	// Return the result
-  	var response = {
-  		line: busiestConnection.line,
-  		totalNumOfPassengers: busiestConnection.totalNumOfPassengers,
-  		reachingVia: busiestConnection.station
-  	};
+	// Return the result
+	var response = {
+		line: busiestConnection.line,
+		totalNumOfPassengers: busiestConnection.totalNumOfPassengers,
+		reachingVia: busiestConnection.station
+	};
 
-  	res.send(response);
+	res.send(response);
 
-  });
+};
 
-  module.exports = router;
