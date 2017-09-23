@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const math = require('mathjs');
 const _  = require('lodash');
 
-const sort = require('./sort');
+const sort = require('./Sorting');
 
 const releaseSchedule = require('./Release Schedule');
 
