@@ -6,6 +6,8 @@ const _  = require('lodash');
 const sort = require('./Sorting');
 
 const releaseSchedule = require('./Release Schedule');
+const hm = require ("./heistmodule")
+const hr = require ('./hrModule')
 
 const stringCompression = require('./String Compression');
 
@@ -37,6 +39,20 @@ app.post('/test', function(req, res) {
   res.json({
     aa: 233,
   });
+});
+
+app.post('/determinant', function(req, res) {
+  let matrix = math.matrix(req.body);
+  res.json(math.det(matrix));
+});
+
+app.post('/heist', function (req, res){
+	res.json (hm.grab (req.body));
+});
+app.post('/releaseSchedule', releaseSchedule);
+
+app.post('/horse-racing', function (req, res){
+	res.json (hr.result (req.body));
 });
 
 app.post('/sort', sort);
