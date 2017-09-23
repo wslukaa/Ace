@@ -39,7 +39,7 @@ module.exports = (req, res) => {
       start: parseTime(b[1]).getTime(),
       end: parseTime(b[2]).getTime(),
     };
-    console.log(aa.start, aa.end);
+    console.log(b[1], new Date(aa.start), b[2], new Date(aa.end));
     tasks.push(aa);
     if (aa.start < end && aa.end > start && aa.start < aa.end) {
       times.push(aa.start);
