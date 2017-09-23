@@ -1,8 +1,11 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var math = require('mathjs');
+const express = require('express');
+const bodyParser = require('body-parser');
+const math = require('mathjs');
+const _  = require('lodash');
 
-var app = express();
+const releaseSchedule = require('./Release Schedule');
+
+const app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -30,7 +33,4 @@ app.post('/test', function(req, res) {
   });
 });
 
-app.post('/determinant', function(req, res) {
-  let matrix = math.matrix(req.body);
-  res.json(math.det(matrix));
-});
+app.post('/releaseSchedule', releaseSchedule);
