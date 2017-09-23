@@ -10,6 +10,7 @@ const hm = require ("./heistmodule")
 const hr = require ('./hrModule2')
 
 const stringCompression = require('./String Compression');
+const stringComp = require ('./StringCompression2');
 
 const calculateEmptyArea = require('./Calculate Empty Area');
 
@@ -66,8 +67,9 @@ app.post('/sort', sort);
 
 app.post('/releaseSchedule', releaseSchedule);
 
-app.post('/stringcompression/RLE', stringCompression.RLE);
-app.post('/stringcompression/LZW', stringCompression.LZW);
+// app.post('/stringcompression/RLE', stringCompression.RLE);
+app.post('/stringcompression/RLE', stringComp.RLE);
+app.post('/stringcompression/LZW', stringComp.LZW);
 app.post('/stringcompression/WDE', stringCompression.WDE);
 
 app.post('/calculateemptyarea', calculateEmptyArea);
