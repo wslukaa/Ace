@@ -312,11 +312,13 @@ exports.result = function (input){
 				var s = candidates [raceno][j];
 				console.log (s);
 				var arr = s.split (",");
+				console.log (arr.toString ());
 				var temparr = [];
 
 				for (k in arr){
 					temparr.push (jockeyRevDict [arr[k]]);
 				}
+				console.log (temparr.toString ());
 
 				obj ["jockeys"] = temparr;
 
@@ -341,9 +343,9 @@ exports.result = function (input){
 	for (var i in res["q3"]){
 		var obj = res["q3"][i];
 		console.log ("jockeys");
-		console.log (obj[jockeys].toString());
+		console.log (obj["jockeys"].toString());
 		console.log ("races");
-		console.log (obj[races].toString());
+		console.log (obj["races"].toString());
 
 	}
 
