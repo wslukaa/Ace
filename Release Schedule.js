@@ -13,10 +13,10 @@ const parseTime = (str) => {
   let delta = 0;
   if (time.indexOf('+') !== -1) {
     const index = time.indexOf('+');
-    delta = -parseInt(time.charAt(index + 2));
+    delta = -parseInt(time.substr(index + 1)) / 100;
   } else if (time.indexOf('-') !== -1) {
     const index = time.indexOf('-');
-    delta = parseInt(time.charAt(index + 2));
+    delta = parseInt(time.substr(index + 1)) / 100;
   }
   return new Date(new Date(`${year}-${month}-${day}T${a[1].substr(0, 12)}Z`).getTime() + delta * 60 * 60000);
 };
@@ -54,7 +54,6 @@ module.exports = (req, res) => {
     });
     if (!wFound) {
       if (e - s > max) {
-        console.log(s, e);
         max = e - s;
       }
     }
