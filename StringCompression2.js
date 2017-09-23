@@ -63,6 +63,7 @@ module.exports = {
   WDE: (req, res) => {
 	const input = req.body;
 	var data = input.data;
+	console.log (data);
 	
 	var dict = {};
 	var dict_counter = 0;
@@ -76,12 +77,10 @@ module.exports = {
 		}
 		else
 		{
-			console.log ("81");
 			dict [temp] = 1;
 			if (temp != "")
 			{
 				temp = "";
-				console.log ("85");
 				count ++;
 			}
 			count ++;
@@ -91,11 +90,9 @@ module.exports = {
 	if (temp != "")
 	{
 		temp = "";
-		console.log ("85");
 		count ++;
 	}
 
-	console.log (count);
 	count *= 12;
 
 	for (var i in dict){
