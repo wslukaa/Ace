@@ -88,7 +88,6 @@ exports.result = function (input){
 
 	var counter = 0;
 	for (var i in data){
-		counter ++;
 		entry = data [i];
 		raceno = entry.racedate + ":" + entry.raceno;
 
@@ -99,24 +98,24 @@ exports.result = function (input){
 		// 	console.log (entry.racedate + ":" + entry.Placing);
 		// }
 
-		if (raceno in q3Storage.raceno_G){
-			if (rank in q3Storage.raceno_G [raceno])
-			{
-				console.log ("now it all adds up " + raceno + " "  + rank)
-			}
-			q3Storage.raceno_G [raceno][rank] = id;
-		}
-		else{
+		if (! (raceno in q3Storage.raceno_G)){
 			q3Storage.raceno_G [raceno] = {};
-			q3Storage.raceno_G [raceno][rank] = id;
 		}
+
+		if (! (rank in q3Storage.raceno_G [raceno]))
+		{
+			q3Storage.raceno_G [raceno][rank] = [];
+		}
+		
+		q3Storage.raceno_G [raceno][rank].push (id);
+			
 	}
 	console.log ("110: " + counter);
 
 	var counter = 0;
 	for (var raceno in q3Storage.raceno_G){
 		for (var rank in q3Storage.raceno_G[raceno]){
-			counter ++;
+			counter += q3Storage.raceno_G[raceno][rank].length;
 		}
 	}
 	console.log ("118: " + counter);
@@ -269,12 +268,29 @@ exports.result = function (input){
 		candidates [raceno] = [];
 		for (var j = minPlacing; j < maxPlacing - 2; j++){
 			if (j in q3Storage.raceno_G [raceno] && j+1 in q3Storage.raceno_G [raceno] && j+2 in q3Storage.raceno_G [raceno]){
-				var cand = q3Storage.raceno_G [raceno][j] + "," + q3Storage.raceno_G [raceno][j + 1] + "," +q3Storage.raceno_G [raceno][j + 2];
-				candidates [raceno].push (cand);
-
+				
+				for (var counter1 in q3Storage.raceno_G [raceno][j]){
+					for (var counter2 in q3Storage.raceno_G [raceno][j + 1]){
+						for (var counter3 in q3Storage.raceno_G [raceno][j + 2]){
+							var cand = q3Storage.raceno_G [raceno][j][counter1] + "," + q3Storage.raceno_G [raceno][j + 1][counter2] + "," +q3Storage.raceno_G [raceno][j + 2][counter3];
+							candidates [raceno].push (cand);
+						}
+					}
+				}
 			}
 		}
 	}
+
+	var counter = 0;
+	for (var i in candidates){
+		for (var j in candidates [i]){
+			counter ++;
+
+		}
+	}
+
+
+	console.log ("289: ", counter);
 
 	// console.log (counter);
 	// var counter = 0;
