@@ -125,6 +125,7 @@ exports.result = function (input){
 	}
 
 	console.log (jockeyCount + " " + raceCount);
+	console.log (q3Storage.jockey_G.toString());
 
 	res ["msg"] = msg;
 
