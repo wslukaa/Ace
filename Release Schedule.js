@@ -3,7 +3,8 @@ const _ = require('lodash');
 const parseTime = (str) => {
   const a = str.split(' ');
   const date = a[0];
-  const time = a[1];
+  let time = a[1];
+  if (time.length === 16 || time.length === 12) time = '0' + time;
 
   const dateArr = date.split('-');
   const day = dateArr[0];
