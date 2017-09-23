@@ -1,6 +1,9 @@
 module.exports = function(req, res) {
-  var points = req.body;
+  var numbers = req.body;
   
-  points.sort(function(a, b){return a-b});
+  numbers.sort(function(a, b) {
+  return a - b;
+});
+console.log(numbers);
   res.json();
 }
