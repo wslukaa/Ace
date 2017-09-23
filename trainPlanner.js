@@ -1,8 +1,8 @@
+var express = require('express');
+var router = express.Router();
 
-  var express = require('express');
-  var router = express.Router();
-
-  router.post('/trainPlanner', function(req, res, next) {
+router.post(exports.trainPlanner=function(req, res, next) {
+  
   	// Input variables
   	var stations = req.body.stations;
   	var destination = req.body.destination;
