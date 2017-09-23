@@ -4,6 +4,5 @@ module.exports = function(req, res) {
   numbers.sort(function(a, b) {
     return a - b;
   });
-  console.log(numbers);
   res.json(numbers);
 }
