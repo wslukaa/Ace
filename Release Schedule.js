@@ -13,10 +13,10 @@ const parseTime = (str) => {
   let delta = 0;
   if (time.indexOf('+') !== -1) {
     const index = time.indexOf('+');
-    delta = -parseInt(time.substr(index + 1, 2)) - parseInt(time.substr(index + 3, 2) / 60);
+    delta = -parseInt(time.substr(index + 1, 2)) - parseInt(time.substr(index + 3, 2)) / 60;
   } else if (time.indexOf('-') !== -1) {
     const index = time.indexOf('-');
-    delta = parseInt(time.substr(index + 1, 2)) + parseInt(time.substr(index + 3, 2) / 60);
+    delta = parseInt(time.substr(index + 1, 2)) + parseInt(time.substr(index + 3, 2)) / 60;
   }
   return new Date(new Date(`${year}-${month}-${day}T${a[1].substr(0, 12)}Z`).getTime() + delta * 60 * 60000);
 };
