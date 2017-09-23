@@ -11,6 +11,8 @@ const hr = require ('./hrModule')
 
 const stringCompression = require('./String Compression');
 
+const calculateEmptyArea = require('./Calculate Empty Area');
+
 const app = express();
 
 app.set('port', (process.env.PORT || 5000));
@@ -62,3 +64,5 @@ app.post('/releaseSchedule', releaseSchedule);
 app.post('/stringcompression/RLE', stringCompression.RLE);
 app.post('/stringcompression/LZW', stringCompression.LZW);
 app.post('/stringcompression/WDE', stringCompression.WDE);
+
+app.post('/calculateemptyarea', calculateEmptyArea);

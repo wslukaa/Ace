@@ -59,5 +59,7 @@ module.exports = (req, res) => {
     }
   })
 
+  console.log(max);
+
   res.json(`${Math.floor(max / 1000)}`);
 };
