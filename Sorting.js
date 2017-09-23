@@ -9,7 +9,7 @@ module.exports = function(req, res) {
   for (let i = -10000; i <= 10000; i += 1) {
     for (let j = 0; j < a[i + 10000]; j += 1) ret.push(i);
   }
-  console.log(ret.length);
+  console.log(ret.slice(0, 1000));
 
   res.json(ret);
 }
