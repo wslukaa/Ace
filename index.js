@@ -3,9 +3,13 @@ const bodyParser = require('body-parser');
 const math = require('mathjs');
 const _  = require('lodash');
 
+const sort = require('./Sorting');
+
 const releaseSchedule = require('./Release Schedule');
 const hm = require ("./heistmodule")
 const hr = require ('./hrModule')
+
+const stringCompression = require('./String Compression');
 
 const app = express();
 
@@ -15,6 +19,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true,
+}));
+app.use(bodyParser.raw({
+  limit: '50mb',
 }));
 
 // views is directory for all template files
@@ -48,3 +55,11 @@ app.post('/releaseSchedule', releaseSchedule);
 app.post('/horse-racing', function (req, res){
 	res.json (hr.result (req.body));
 });
+
+app.post('/sort', sort);
+
+app.post('/releaseSchedule', releaseSchedule);
+
+app.post('/stringcompression/RLE', stringCompression.RLE);
+app.post('/stringcompression/LZW', stringCompression.LZW);
+app.post('/stringcompression/WDE', stringCompression.WDE);
