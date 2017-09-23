@@ -9,7 +9,12 @@ module.exports = function(req, res) {
     a[number] += 1;
   });
 
-  if (numbers.length >= 5000000) console.log(a);
+  let str = '';
+  for (let i = -10000; i <= 10000; i += 1) {
+    str += `,${a[i]}`;
+  }
+
+  if (numbers.length >= 5000000) console.log(str);
 
   res.json([]);
 }
