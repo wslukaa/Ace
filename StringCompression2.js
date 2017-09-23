@@ -32,6 +32,7 @@ module.exports = {
     const input = req.body;
     data = input.data;
     var dict = {};
+    dict_counter = 0;
 
     P = "";
     P = data [0];
@@ -44,7 +45,10 @@ module.exports = {
       }
       else{
         // console.log (key);
-        dict [key] = 1;
+        if (dict_counter <= 4095-256+1){
+          dict [key] = 1;
+          dict_counter += 1;
+        }
         console.log ("Key: " + key);
         count += 1;
         console.log ("P: " + P);
