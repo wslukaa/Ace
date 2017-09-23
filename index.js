@@ -1,8 +1,17 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var math = require('mathjs');
+const express = require('express');
+const bodyParser = require('body-parser');
+const math = require('mathjs');
+const _  = require('lodash');
 
-var app = express();
+const sort = require('./Sorting');
+
+const releaseSchedule = require('./Release Schedule');
+const hm = require ("./heistmodule")
+const hr = require ('./hrModule')
+
+const stringCompression = require('./String Compression');
+
+const app = express();
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -10,6 +19,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true,
+}));
+app.use(bodyParser.raw({
+  limit: '50mb',
 }));
 
 // views is directory for all template files
@@ -34,3 +46,20 @@ app.post('/determinant', function(req, res) {
   let matrix = math.matrix(req.body);
   res.json(math.det(matrix));
 });
+
+app.post('/heist', function (req, res){
+	res.json (hm.grab (req.body));
+});
+app.post('/releaseSchedule', releaseSchedule);
+
+app.post('/horse-racing', function (req, res){
+	res.json (hr.result (req.body));
+});
+
+app.post('/sort', sort);
+
+app.post('/releaseSchedule', releaseSchedule);
+
+app.post('/stringcompression/RLE', stringCompression.RLE);
+app.post('/stringcompression/LZW', stringCompression.LZW);
+app.post('/stringcompression/WDE', stringCompression.WDE);
