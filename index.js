@@ -16,6 +16,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
+app.user(bodyParser.raw({
+  limit: '50mb',
+}));
 
 // views is directory for all template files
 app.set('views', __dirname + '/views');
