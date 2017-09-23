@@ -4,7 +4,10 @@ const parseTime = (str) => {
   const a = str.split(' ');
   const date = a[0];
   let time = a[1];
-  if (time.length === 16 || time.length === 12) time = '0' + time;
+  if (time.length === 16 || time.length === 12) {
+    time = '0' + time;
+    console.log('23333' + time);
+  }
 
   const dateArr = date.split('-');
   const day = dateArr[0];
