@@ -69,8 +69,19 @@ module.exports = (req, res) => {
         res.json(Math.round((s - Math.PI * c.r * c.r/4) * 100) / 100);
     return;
   }
-
-  
+function find_angle(Ax,Ay,Bx,By,Cx,Cy) {
+    var AB = Math.sqrt(Math.pow(Bx-Ax,2)+ Math.pow(By-Ay,2));    
+    var BC = Math.sqrt(Math.pow(Bx-Cx,2)+ Math.pow(By-Cy,2)); 
+    var AC = Math.sqrt(Math.pow(Cx-Ax,2)+ Math.pow(Cy-Ay,2));
+    return Math.acos((BC*BC+AB*AB-AC*AC)/(2*BC*AB));
+}
+   if (c.x > x0 && c.x<x1 && c.y < y0 && c.y1 > y0 && c.y1 < y1){
+     var AX = Math.sqrt(c.r*c.r-(x0-c.x)*(x0-c.x));
+     var area_traingle = AX*(x0-c.x);
+     var angle= find_angle(c.x-AX,y0,c.x,c.y,c.x+AX,y0);
+     res.json(s-(Math.round((Math.PI * c.r * c.r*angle/(2*Math.PI)) * 100) / 100-area_traingle));
+    return;
+  }
 
   res.json(s);
 };}
