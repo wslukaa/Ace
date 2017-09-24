@@ -2,41 +2,42 @@ const _ = require('lodash');
 var ts = require ('timsort')
 
 module.exports = function (input) {
-  var numbers = input;
-  var map = {};
-  var arr = [];
-  var resArr = [];
-  var i;
+  var quickSort = (function () {
 
-  for (i in numbers){
-  	if (numbers [i] in map){
-  		map [numbers [i]] += 1;
-  	}
-  	else{
-  		map [numbers [i]] = 1;	
-  		arr.push (numbers [i]);
-  	}
-  }
-  console.log (i);
-  if (i > 999998){
-  	console.log (numbers);
-  }
+    function partition(array, left, right) {
+        var cmp = array[right - 1],
+            minEnd = left,
+            maxEnd;
+        for (maxEnd = left; maxEnd < right - 1; maxEnd += 1) {
+            if (array[maxEnd] <= cmp) {
+                swap(array, maxEnd, minEnd);
+                minEnd += 1;
+            }
+        }
+        swap(array, minEnd, right - 1);
+        return minEnd;
+    }
 
+    function swap(array, i, j) {
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+        return array;
+    }
+    
+    function quickSort(array, left, right) {
+        if (left < right) {
+            var p = partition(array, left, right);
+            quickSort(array, left, p);
+            quickSort(array, p + 1, right);
+        }
+        return array;
+    }
 
-  function compareNumbers (a, b){
-  	return a-b;
-  }
+    return function (array) {
+        return quickSort(array, 0, array.length);
+    };
+}());
 
-  ts.sort (arr, compareNumbers);
-
-  for (var i in arr){
-  	var j;
-  	var num = arr [i];
-  	for (j = 0; j < map [num]; j++)
-  		{
-  			resArr.push (num);
-  		}
-  }
-  
-  return (resArr);
+  return quickSort (input);
 }
