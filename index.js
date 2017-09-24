@@ -9,7 +9,6 @@ const releaseSchedule = require('./Release Schedule');
 const hm = require ("./heistmodule")
 const hr = require ('./hrModule')
 
-const stringCompression = require('./String Compression');
 const stringComp = require ('./StringCompression2');
 
 const calculateEmptyArea = require('./Calculate Empty Area');
@@ -85,13 +84,10 @@ app.post('/sort', function (req, res, next){
   var lastestArr = [];
 
   req.on( 'data', function( chunk ) {
-    console.log (typeof chunk);
-    console.log (chunk.length);
 
     var temp = [];
     for (var i in chunk){
       var num = chunk [i] - 48;
-      // console.log (num);
       if (num == -3){
         negative = true;
         continue;
@@ -117,9 +113,6 @@ app.post('/sort', function (req, res, next){
         lastestArr = temp;
       }
 
-      console.log ("117: " + arr.toString ());
-      console.log ("118: " + lastestArr.toString ());
-
       if (lastestArr.length == 0)
       {
         arr = sort.result (arr);
@@ -132,23 +125,8 @@ app.post('/sort', function (req, res, next){
           var left = -1;
           var right = arr.length;
           var pivot = Math.floor (arr.length / 2);
-
-          // if (lastestArr [index] < arr [0]){
-          //   arr.shift (lastestArr [index]);
-          //   index ++;
-          //   continue;
-          // }
-
-          // if (lastestArr [index] > arr [arr.length - 1]){
-          //   arr.push (lastestArr [index]);
-          //   index ++;
-          //   continue;
-          // }
-
           
           while (true){
-
-            console.log ("" + index + " " + left + " " + right + " " + pivot);
 
             if (lastestArr [index] < arr [pivot]){
               right = pivot;
@@ -177,34 +155,15 @@ app.post('/sort', function (req, res, next){
           index ++;
           }
         }
-
-    console.log ("Hello?");
-    console.log (arr.toString());
-
-    // if (chunk [0] == '['){
-    //   chunk.shift ();
-    // }
-    // if (chunk [chunk.length -1] == ']'){
-    //   chunk.pop ();
-    // }
-    // data += chunk;
-    // console.log (data);
   });
 
   req.on( 'end', function() {
-    // req.rawBody = data;
-    // console.log( 'on end: ', data )
-    // if ( data && data.indexOf( '{' ) > -1 ) {
-    //   req.body = JSON.parse( data );
-    // }
-    // next();
     res.json (arr);
   });
 });
 
 app.post('/releaseSchedule', jsonParser, releaseSchedule);
 
-// app.post('/stringcompression/RLE', stringCompression.RLE);
 app.post('/stringcompression/RLE', jsonParser, stringComp.RLE);
 app.post('/stringcompression/LZW', jsonParser, stringComp.LZW);
 app.post('/stringcompression/WDE', jsonParser, stringComp.WDE);
