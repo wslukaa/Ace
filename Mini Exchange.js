@@ -81,6 +81,7 @@ module.exports = (req, res) => {
       return Message.find();
     })
     .then((messagesA) => {
+      console.log(messagesA);
       const messages = [];
       _.each(messagesA, (message) => {
         recoverDot(message);
