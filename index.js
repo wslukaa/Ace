@@ -119,42 +119,30 @@ app.post('/sort', function (req, res, next){
       }
       else
       {
-        var index = 0;
-        while (index < lastestArr.length){
+        lastestArr = sort.result (lastestArr);
+        index1 = 0;
+        index2 = 0;
 
-          var left = -1;
-          var right = arr.length;
-          var pivot = Math.floor (arr.length / 2);
-          
-          while (true){
+        while (index1 < arr.length || index2 < arr.length){
+          if (index1 == arr.length - 1){
+            arr.splice (index1, 0, lastestArr [index2]);
+            index2 += 1;
+            continue;
+          }
 
-            if (lastestArr [index] < arr [pivot]){
-              right = pivot;
-              if (right == left + 1){
-                pivot = right;
-                break;
-              }
-              pivot = Math.floor ((left + pivot) / 2);
-              continue;
-            }
-            if (lastestArr [index] > arr [pivot]){
-              left = pivot;
-              if (right == left + 1){
-                pivot = left + 1;
-                break;
-              }
-              pivot = Math.floor ((right + pivot) / 2);
-              continue;
-            }
+          if (index2 == lastestArr.length - 1){
             break;
           }
 
-          arr.splice (pivot, 0, lastestArr [index])
-          console.log (arr.toString ());
-
-          index ++;
+          if (lastestArr [index2] <= arr [index1]){
+            arr.splice (index1, 0, lastestArr [index2]);
+            index2 +=1;
+            continue;
           }
+
+          index1 += 1;
         }
+      }
   });
 
   req.on( 'end', function() {
