@@ -1,5 +1,6 @@
-const _ = require('lodash');
 const fetch = require('node-fetch');
+const mongo = require('mongodb-bluebird');
+const _ = require('lodash');
 
 const runId = '123cddb0-cc63-4d67-8c2d-e8db5940a60d';
 
@@ -18,26 +19,20 @@ const dealWithMessages = (messages) => {
 };
 
 module.exports = (req, res) => {
-  console.log(req.body, typeof req.body);
-  let messages = [{
-    messageId: 1,
-    messageType: 'SOD',
-    closePrice: {
-      '0005.HK': 75,
-    },
-  }, {
-    messageId: 3,
-    messageType: 'EOD',
-  }, {
-    messageId: 2,
-    messageType: 'NEW',
-    orderId: 'order-1',
-    quantity: 1000,
-    symbol: '0005.HK',
-    side: 'B',
-    orderType: 'LMT',
-    price: 74.9,
-  }];
+  const message = req.body;
+  mongo.connect('mongodb://wufan:123456@ds141434.mlab.com:41434/codeitsuisse')
+  .then((mongo) => {
+    console.log(message);
+    const Message = mongo.collection('message');
+    return Message.insert(message);
+  })
+  .then(() => {
+    res.json('');
+  })
+  .catch((err) => {
+    res.json('');
+  });
+  /*
   const result = dealWithMessages(messages);
   fetch('https://cis2017-mini-exchange.herokuapp.com/evaluate/result', {
     method: 'POST',
@@ -51,4 +46,5 @@ module.exports = (req, res) => {
     console.log(result);
     res.json(result);
   });
+  */
 };
