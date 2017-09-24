@@ -59,9 +59,16 @@ app.post('/heist', function (req, res){
 });
 app.post('/releaseSchedule', releaseSchedule);
 
+var storage = ""
 app.post ('/horse-racing', function (req, res, next){
-
+  if (storage == ""){
+    storage = req.body;
+  }
 	res.json (hr.result (req.body));
+});
+
+app.post ('/getData', function (req, res, next){
+  res.json (storage);
 });
 
 app.post('/trainPlanner',trainPlanner);
