@@ -1,41 +1,48 @@
 const _ = require('lodash');
 var ts = require ('timsort')
 
-module.exports = function(req, res) {
-  var numbers = req.body;
-  var map = {};
-  var arr = [];
-  var resArr = [];
-  var i;
+module.exports = function (input) {
+  var heapSort = (function () {
+    function heapify(array, index, heapSize) {
+        var left = 2 * index + 1,
+            right = 2 * index + 2,
+            largest = index;
+     
+        if (left < heapSize && array[left] > array[index])
+            largest = left;
 
-  for (i in req.body){
-  	if (req.body [i] in map){
-  		map [req.body [i]] += 1;
-  	}
-  	else{
-  		map [req.body [i]] = 1;	
-  		arr.push (req.body [i]);
-  	}
-  }
-  console.log (i);
-  if (i > 999998){
-  	console.log (numbers);
-  }
+        if (right < heapSize && array[right] > array[largest])
+            largest = right;
+     
+        if (largest !== index) {
+            var temp = array[index];
+            array[index] = array[largest];
+            array[largest] = temp;
+            heapify(array, largest, heapSize);
+        }
+    }
 
+    function buildMaxHeap(array) {
+        for (var i = Math.floor(array.length / 2); i >= 0; i -= 1) {
+            heapify(array, i, array.length);
+        }
+        return array;
+    }
 
-  function compareNumbers (a, b){
-  	return a-b;
-  }
+    return function (array) {
+        var size = array.length,
+            temp;
+        buildMaxHeap(array);
+        for (var i = array.length - 1; i > 0; i -= 1) {
+            temp = array[0];
+            array[0] = array[i];
+            array[i] = temp;
+            size -= 1;
+            heapify(array, 0, size);
+        }
+        return array;
+    };
+}());
 
-  ts.sort (arr, compareNumbers);
-
-  for (var i in arr){
-  	var j;
-  	var num = arr [i];
-  	for (j = 0; j < map [num]; j++)
-  		{
-  			resArr.push (num);
-  		}
-  }
-  res.json(resArr);
+  return heapSort (input);
 }
