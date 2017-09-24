@@ -175,8 +175,8 @@ module.exports = (req, res) => {
               }
             } else {
               for (let i = index; i < target.length - 1; i += 1) {
-                if ((order.side === 'B' && target[i].price === target[i - 1].price)
-                  || (order.side === 'S' && target[i].price === target[i - 1].price)) {
+                if ((order.side === 'B' && target[i].price === target[i + 1].price)
+                  || (order.side === 'S' && target[i].price === target[i + 1].price)) {
                   const swap = target[i];
                   target[i] = target[i + 1];
                   target[i + 1] = swap;
