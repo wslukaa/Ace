@@ -279,22 +279,23 @@ module.exports = (req, res) => {
         if (!order.fills.length) delete order.fills;
       });
 
-      fetch('https://cis2017-mini-exchange.herokuapp.com/evaluate/result', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
-          runId,
-          result: orderArr,
-        },
-      })
+      db.collection('message').remove()
       .then(() => {
-        db.collection('message').remove()
-        .then(() => {
-          res.json({
+        fetch('https://cis2017-mini-exchange.herokuapp.com/evaluate/result', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: {
             runId,
             result: orderArr,
+          },
+        })
+        .then(() => {
+            res.json({
+              runId,
+              result: orderArr,
+            });
           });
         });
       });
