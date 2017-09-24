@@ -203,9 +203,14 @@ module.exports = (req, res) => {
           if (!order) return;
           if (order.state !== 'LIVE') return;
           order.price = price;
-          const target = order.side === 'B' ? goods[order.symbol].ordersB : goods[order.symbol].ordersS;
+          let target = order.side === 'B' ? goods[order.symbol].ordersB : goods[order.symbol].ordersS;
           const index = target.indexOf(order);
           target = [...target.slice(0, index), target.slice(index + 1)];
+          if (order.side === 'B') {
+            goods[order.symbol].ordersB = target;
+          } else {
+            goods[order.symbol].ordersS = target;
+          }
           target.push(order);
           for (let i = target.length - 1; i > 0; i -= 1) {
             if ((order.side === 'B' && target[i].price > target[i - 1].price)
