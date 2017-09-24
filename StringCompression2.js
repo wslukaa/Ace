@@ -47,7 +47,7 @@ module.exports = {
 		// console.log (key);
 		// if (dict_counter <= 4095-256+1){
 		  dict [key] = 1;
-		  dict_counter += 1;
+		  // dict_counter += 1;
 		// }
 		console.log ("Key: " + key);
 		count += 1;
@@ -78,10 +78,6 @@ module.exports = {
 		}
 		else
 		{
-			if (data[i] == "'"){
-				temp = temp + data[i];
-				continue;
-			}
 			if (temp != "")
 			{
 				dict [temp] = 1;
