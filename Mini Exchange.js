@@ -279,6 +279,9 @@ module.exports = (req, res) => {
 
       fetch('https://cis2017-mini-exchange.herokuapp.com/evaluate/result', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: {
           runId,
           result: orderArr,
