@@ -290,48 +290,48 @@ exports.result = function (input){
 
 	console.log ("289: ", counter);
 
-	// //stage 1 completed
+	//stage 1 completed
 
-	// for (var i = 0; i < keys.length-1; i++){
-	// 	raceno = keys [i];
-	// 	var cand1 = candidates [raceno];
-	// 	var cand2 = candidates [keys [i + 1]];
-	// 	var tempCand = []
+	for (var i = 0; i < keys.length-1; i++){
+		raceno = keys [i];
+		var cand1 = candidates [raceno];
+		var cand2 = candidates [keys [i + 1]];
+		var tempCand = []
 
-	// 	for (var j = 0; j < cand1.length; j++){
-	// 		for (var k = 0; k < cand2.length; k++){
-	// 			if (cand1 [j] ==  cand2[k]) {
-	// 				tempCand.push (cand1 [j]);
-	// 			}
-	// 		}
-	// 	}
+		for (var j = 0; j < cand1.length; j++){
+			for (var k = 0; k < cand2.length; k++){
+				if (cand1 [j] ==  cand2[k]) {
+					tempCand.push (cand1 [j]);
+				}
+			}
+		}
 
-	// 	candidates [raceno] = tempCand;
-	// }
+		candidates [raceno] = tempCand;
+	}
 
-	// delete candidates [keys [keys.length-1]];
+	delete candidates [keys [keys.length-1]];
 
 	// //stage 2 completed
 
-	// for (var i = 0; i < keys.length-2; i++){
-	// 	raceno = keys [i];
-	// 	var cand1 = candidates [raceno];
-	// 	var cand2 = candidates [keys [i + 1]];
-	// 	var tempCand = []
+	for (var i = 0; i < keys.length-2; i++){
+		raceno = keys [i];
+		var cand1 = candidates [raceno];
+		var cand2 = candidates [keys [i + 1]];
+		var tempCand = []
 
-	// 	for (var j = 0; j < cand1.length; j++){
-	// 		for (var k = 0; k < cand2.length; k++){
-	// 			if (cand1 [j] ==  cand2[k]) {
-	// 				tempCand.push (cand1 [j]);
-	// 			}
-	// 		}
-	// 	}
+		for (var j = 0; j < cand1.length; j++){
+			for (var k = 0; k < cand2.length; k++){
+				if (cand1 [j] ==  cand2[k]) {
+					tempCand.push (cand1 [j]);
+				}
+			}
+		}
 
-	// 	candidates [raceno] = tempCand;
-	// }
+		candidates [raceno] = tempCand;
+	}
 
-	// delete candidates [keys [keys.length-2]];
-	// console.log (keys [keys.length-2]);
+	delete candidates [keys [keys.length-2]];
+	console.log (keys [keys.length-2]);
 
 	// stage 3 completed
 
