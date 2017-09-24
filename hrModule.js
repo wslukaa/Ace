@@ -255,8 +255,6 @@ exports.result = function (input){
 	console.log ("235" + ":" + counter);
 
 
-
-
 //  ------------------ Q3 Post Processing -------------------
 
 	// console.log (keys.length);
@@ -292,73 +290,48 @@ exports.result = function (input){
 
 	console.log ("289: ", counter);
 
-	// console.log (counter);
-	// var counter = 0;
-	// for (var i in candidates){
-	// 	counter ++;
-	// } 
-	// console.log (counter);
+	// //stage 1 completed
 
-	// return candidates;
+	// for (var i = 0; i < keys.length-1; i++){
+	// 	raceno = keys [i];
+	// 	var cand1 = candidates [raceno];
+	// 	var cand2 = candidates [keys [i + 1]];
+	// 	var tempCand = []
 
-	// tempk = "2017-12-06:1";
-	// for (var i in q3Storage.raceno_G [tempk]){
-	// 	console.log (q3Storage.raceno_G [tempk][i]);
+	// 	for (var j = 0; j < cand1.length; j++){
+	// 		for (var k = 0; k < cand2.length; k++){
+	// 			if (cand1 [j] ==  cand2[k]) {
+	// 				tempCand.push (cand1 [j]);
+	// 			}
+	// 		}
+	// 	}
+
+	// 	candidates [raceno] = tempCand;
 	// }
 
-	// tempk = "2018-12-06:2";
-	// for (var i in q3Storage.raceno_G [tempk]){
-	// 	console.log (q3Storage.raceno_G [tempk][i]);
+	// delete candidates [keys [keys.length-1]];
+
+	// //stage 2 completed
+
+	// for (var i = 0; i < keys.length-2; i++){
+	// 	raceno = keys [i];
+	// 	var cand1 = candidates [raceno];
+	// 	var cand2 = candidates [keys [i + 1]];
+	// 	var tempCand = []
+
+	// 	for (var j = 0; j < cand1.length; j++){
+	// 		for (var k = 0; k < cand2.length; k++){
+	// 			if (cand1 [j] ==  cand2[k]) {
+	// 				tempCand.push (cand1 [j]);
+	// 			}
+	// 		}
+	// 	}
+
+	// 	candidates [raceno] = tempCand;
 	// }
-	
-	// tempk = "2019-12-06:1";
-	// for (var i in q3Storage.raceno_G [tempk]){
-	// 	console.log (q3Storage.raceno_G [tempk][i]);
-	// }
 
-	//stage 1 completed
-
-	for (var i = 0; i < keys.length-1; i++){
-		raceno = keys [i];
-		var cand1 = candidates [raceno];
-		var cand2 = candidates [keys [i + 1]];
-		var tempCand = []
-
-		for (var j = 0; j < cand1.length; j++){
-			for (var k = 0; k < cand2.length; k++){
-				if (cand1 [j] ==  cand2[k]) {
-					tempCand.push (cand1 [j]);
-				}
-			}
-		}
-
-		candidates [raceno] = tempCand;
-	}
-
-	delete candidates [keys [keys.length-1]];
-
-	// return candidates;
-	//stage 2 completed
-
-	for (var i = 0; i < keys.length-2; i++){
-		raceno = keys [i];
-		var cand1 = candidates [raceno];
-		var cand2 = candidates [keys [i + 1]];
-		var tempCand = []
-
-		for (var j = 0; j < cand1.length; j++){
-			for (var k = 0; k < cand2.length; k++){
-				if (cand1 [j] ==  cand2[k]) {
-					tempCand.push (cand1 [j]);
-				}
-			}
-		}
-
-		candidates [raceno] = tempCand;
-	}
-
-	delete candidates [keys [keys.length-2]];
-	console.log (keys [keys.length-2]);
+	// delete candidates [keys [keys.length-2]];
+	// console.log (keys [keys.length-2]);
 
 	// stage 3 completed
 
