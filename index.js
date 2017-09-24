@@ -7,7 +7,7 @@ const sort = require('./Sorting');
 const trainPlanner =require('./trainPlanner');
 const releaseSchedule = require('./Release Schedule');
 const hm = require ("./heistmodule")
-const hr = require ('./hrModule2')
+const hr = require ('./hrModule')
 
 const stringCompression = require('./String Compression');
 const stringComp = require ('./StringCompression2');
@@ -59,9 +59,16 @@ app.post('/heist', function (req, res){
 });
 app.post('/releaseSchedule', releaseSchedule);
 
+var storage = ""
 app.post ('/horse-racing', function (req, res, next){
-
+  if (storage == ""){
+    storage = req.body;
+  }
 	res.json (hr.result (req.body));
+});
+
+app.post ('/getData', function (req, res, next){
+  res.json (storage);
 });
 
 app.post('/trainPlanner',trainPlanner);
