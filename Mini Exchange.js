@@ -274,6 +274,7 @@ module.exports = (req, res) => {
 
       _.each(orderArr, (order) => {
         delete order.orderType;
+        if (!order.fills.length) delete order.fills;
       });
 
       fetch('https://cis2017-mini-exchange.herokuapp.com/evaluate/result', {
