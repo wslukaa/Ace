@@ -23,8 +23,7 @@ const checkDot = (obj) => {
   _.each(Object.keys(obj), (key) => {
     if (typeof obj[key] === 'object') checkDot(obj[key]);
     if (key.indexOf('.') !== -1) {
-      console.log(key.replace('.', '\u002e'));
-      obj[key.replace('.', '\u002e')] = obj[key];
+      obj[key.replace('.', 'u002e')] = obj[key];
       delete obj[key];
     }
   });
