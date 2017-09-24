@@ -292,10 +292,9 @@ module.exports = (req, res) => {
           },
         })
         .then(() => {
-            res.json({
-              runId,
-              result: orderArr,
-            });
+          res.json({
+            runId,
+            result: orderArr,
           });
         });
       });
