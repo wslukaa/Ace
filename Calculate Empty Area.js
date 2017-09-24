@@ -150,5 +150,14 @@ function find_angle(Ax,Ay,Bx,By,Cx,Cy) {
      res.json(s-(Math.round((Math.PI * c.r * c.r*angle/(2*Math.PI)) * 100) / 100-area_traingle1-area_traingle2));
     return;
   }
+     if (c.x < x0 && c.y<y0 && c.y1 < y1 && c.y0 > y0 && c.x1<x1 && c.x1>x0){
+     var AX1= Math.sqrt(c.r*c.r-(y0-c.y)*(y0-c.y))-(x0-c.x);
+     var AX2=Math.sqrt(c.r*c.r-(x0-c.x)*(x0-c.x))-(y0-c.y);
+     var area_traingle1 = AX1*(y0-c.y)/2;
+     var area_traingle2 = AX2*(x0-c.x)/2;
+     var angle= find_angle(x1,y0+AX1,c.x,c.y,x1-AX2,y0);
+     res.json(s-(Math.round((Math.PI * c.r * c.r*angle/(2*Math.PI)) * 100) / 100-area_traingle1-area_traingle2));
+    return;
+  }
   res.json(s);
 };}
