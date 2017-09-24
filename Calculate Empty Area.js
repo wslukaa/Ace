@@ -89,7 +89,7 @@ function find_angle(Ax,Ay,Bx,By,Cx,Cy) {
      res.json(s-(Math.round((Math.PI * c.r * c.r*angle/(2*Math.PI)) * 100) / 100-area_traingle));
     return;
   }
-      if (c.x < x0 && c.x1>x0 && c.y > y0 && c.y < y1 && c.x1<x1){
+      if (c.x < x0 && c.x1>x0 && c.y0 > y0 && c.y1 < y1 && c.x1<x1){
      var AX = Math.sqrt(c.r*c.r-(x0-c.x)*(x0-c.x));
      var area_traingle = AX*(x0-c.x);
      var angle= find_angle(x0,c.y+AX,c.x,c.y,x0,c.y-AX);
@@ -97,7 +97,7 @@ function find_angle(Ax,Ay,Bx,By,Cx,Cy) {
     return;
   }
     
-      if (c.x > x1 && c.x0>x0 && c.y > y0 && c.y < y1 &&c.x0<x1 ){
+      if (c.x > x1 && c.x0>x0 && c.y0 > y0 && c.y1 < y1 &&c.x0<x1 ){
      var AX = Math.sqrt(c.r*c.r-(c.x-x1)*(c.x-x1));
      var area_traingle = AX*(c.x-x1);
      var angle= find_angle(x1,c.y+AX,c.x,c.y,x1,c.y-AX);
@@ -115,6 +115,20 @@ function find_angle(Ax,Ay,Bx,By,Cx,Cy) {
      var AX = Math.sqrt(c.r*c.r-(c.y-y1)*(c.y-y1));
      var area_traingle = AX*(c.y-y1);
      var angle= find_angle(c.x-AX,y1,c.x,c.y,c.x+AX,y1);
+     res.json(s-(Math.PI * c.r * c.r-(Math.round((Math.PI * c.r * c.r*angle/(2*Math.PI)) * 100) / 100-area_traingle)));
+    return;
+  }
+     if (c.x > x0 && c.x1<x1 && c.y1 < y1 && c.y0 > y0 && c.x0<x0){
+     var AX = Math.sqrt(c.r*c.r-(x0-c.x)*(x0-c.x));
+     var area_traingle = AX*(x0-c.x);
+     var angle= find_angle(x0,c.y+AX,c.x,c.y,x0,c.y-AX);
+     res.json(s-(Math.PI * c.r * c.r-(Math.round((Math.PI * c.r * c.r*angle/(2*Math.PI)) * 100) / 100-area_traingle)));
+    return;
+  }
+      if (c.x < x1 && c.x0>x0 && c.y0 > y0 && c.y1 < y1 &&c.x1>x1 ){
+     var AX = Math.sqrt(c.r*c.r-(x1-c.x)*(x1-c.x));
+     var area_traingle = AX*(x1-c.x);
+     var angle= find_angle(x1,c.y+AX,c.x,c.y,x1,c.y-AX);
      res.json(s-(Math.PI * c.r * c.r-(Math.round((Math.PI * c.r * c.r*angle/(2*Math.PI)) * 100) / 100-area_traingle)));
     return;
   }
