@@ -75,10 +75,12 @@ module.exports = (req, res) => {
 
   if (typeof message.runId === 'string') {
     const runId = message.runId;
+    let db;
 
     mongo.connect('mongodb://wufan:123456@ds141434.mlab.com:41434/codeitsuisse')
-    .then((mongo) => {
-      const Message = mongo.collection('message');
+    .then((mongoA) => {
+      db = mongoA;
+      const Message = db.collection('message');
       return Message.find();
     })
     .then((messagesA) => {
@@ -244,7 +246,7 @@ module.exports = (req, res) => {
               os.price = price;
             }
           } else {
-            price = -1;
+            price = os.price;
           }
           const quantity = Math.min(ob.openQuantity, os.openQuantity);
           ob.fills.push({
@@ -288,9 +290,12 @@ module.exports = (req, res) => {
         },
       })
       .then(() => {
-        res.json({
-          runId,
-          result: orderArr,
+        db.collection('message').remove()
+        .then(() => {
+          res.json({
+            runId,
+            result: orderArr,
+          });
         });
       });
     })
