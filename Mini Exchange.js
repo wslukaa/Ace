@@ -51,6 +51,7 @@ const checkMessage = (message) => {
   if (type === 'CANCEL') {
     if (!message.orderId) return false;
   }
+  return true;
 };
 
 module.exports = (req, res) => {
@@ -81,13 +82,13 @@ module.exports = (req, res) => {
       return Message.find();
     })
     .then((messagesA) => {
-      console.log(messagesA);
       const messages = [];
       _.each(messagesA, (message) => {
         recoverDot(message);
         if (!checkMessage(message)) return;
         messages.push(message);
       });
+      console.log(message);
       messages.sort((A, B) => A.messageId - B.messageId);
       if (messages[0].messageType !== 'SOD' || messages[messages.length - 1].messageType !== 'EOD') {
         res.json('Invalid messages SOD and EOD');
