@@ -31,6 +31,40 @@ const checkDot = (obj) => {
 
 module.exports = (req, res) => {
   const message = req.body;
+
+  if (message.type === 'clean') {
+    mongo.connect('mongodb://wufan:123456@ds141434.mlab.com:41434/codeitsuisse')
+    .then((mongo) => {
+      const Message = mongo.collection('message');
+      return Message.remove(message);
+    })
+    .then(() => {
+      res.json('');
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json('');
+    });
+    return;
+  }
+
+  if (typeof message.runId === 'string') {
+    mongo.connect('mongodb://wufan:123456@ds141434.mlab.com:41434/codeitsuisse')
+    .then((mongo) => {
+      const Message = mongo.collection('message');
+      return Message.find();
+    })
+    .then((messages) => {
+      console.log(messages);
+      res.json('');
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json('');
+    });
+    return;
+  }
+
   checkDot(message);
   console.log(message);
 
