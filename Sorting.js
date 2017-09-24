@@ -18,6 +18,9 @@ module.exports = function(req, res) {
   	}
   }
   console.log (i);
+  if (i > 999998){
+  	console.log (numbers);
+  }
 
 
   function compareNumbers (a, b){
