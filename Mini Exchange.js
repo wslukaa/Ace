@@ -2,22 +2,6 @@ const fetch = require('node-fetch');
 const mongo = require('mongodb-bluebird');
 const _ = require('lodash');
 
-const runId = '123cddb0-cc63-4d67-8c2d-e8db5940a60d';
-
-const dealWithMessages = (messages) => {
-  messages.sort((A, B) => A.messageId - B.messageId);
-  return [{
-    "orderId": "order-1",
-    "quantity": 1000,
-    "symbol": "0005.HK",
-    "side": "B",
-    "price": 74.9,
-    "openQuantity": 1000,
-    "state": "LIVE",
-    "fills": [],
-  }];
-};
-
 const checkDot = (obj) => {
   if (typeof obj !== 'object') return;
   _.each(Object.keys(obj), (key) => {
@@ -27,7 +11,47 @@ const checkDot = (obj) => {
       delete obj[key];
     }
   });
-}
+};
+
+const recoverDot = (obj) => {
+  if (typeof obj !== 'object') return;
+  _.each(Object.keys(obj), (key) => {
+    if (typeof obj[key] === 'object') recoverDot(obj[key]);
+    if (key.indexOf('u002e') !== -1) {
+      obj[key.replace('u002e', '.')] = obj[key];
+      delete obj[key];
+    }
+  });
+};
+
+const checkMessage = (message) => {
+  if (typeof message.messageId !== 'number') return false;
+  const type = message.messageType;
+  if (['SOD', 'NEW', 'QUANTITY', 'PRICE', 'CANCEL', 'EOD'].indexOf(type) === -1) return false;
+  if (type === 'SOD') {
+    if (!message.closePrice) return false;
+  }
+  if (type === 'NEW') {
+    if (!message.orderId) return false;
+    if (typeof message.quantity !== 'number') return false;
+    if (message.quantity <= 0) return false;
+    if (typeof message.symbol !== 'string') return false;
+    if (message.side !== 'B' && message.side !== 'S') return false;
+    if (message.orderType !== 'LMT' && message.orderType !== 'MKT') return false;
+    if (typeof message.price !== 'number') return false;
+  }
+  if (type === 'QUANTITY') {
+    if (!message.orderId) return false;
+    if (typeof message.quantity !== 'number') return false;
+  }
+  if (type === 'PRICE') {
+    if (!message.orderId) return false;
+    if (typeof message.price !== 'number') return false;
+  }
+  if (type === 'CANCEL') {
+    if (!message.orderId) return false;
+  }
+};
 
 module.exports = (req, res) => {
   const message = req.body;
@@ -49,13 +73,32 @@ module.exports = (req, res) => {
   }
 
   if (typeof message.runId === 'string') {
+    const runId = message.runId;
+
     mongo.connect('mongodb://wufan:123456@ds141434.mlab.com:41434/codeitsuisse')
     .then((mongo) => {
       const Message = mongo.collection('message');
       return Message.find();
     })
-    .then((messages) => {
+    .then((messagesA) => {
+      const messages = [];
+      _.each(messagesA, (message) => {
+        recoverDot(message);
+        if (!checkMessage(message)) return;
+        messages.push(message);
+      });
+      messages.sort((A, B) => A.messageId - B.messageId);
+      if (messages[0].messageType !== 'SOD' || messages[messages.length - 1].messageType !== 'EOD') {
+        res.json('Invalid messages SOD and EOD');
+        return;
+      }
       console.log(messages);
+
+      const { closePrice } = messages[0];
+      _.each(messages, (message, index) => {
+        if (index === 0 || index === messages.length) return;
+      });
+
       res.json('');
     })
     .catch((err) => {
@@ -80,19 +123,4 @@ module.exports = (req, res) => {
     console.log(err);
     res.json('');
   });
-  /*
-  const result = dealWithMessages(messages);
-  fetch('https://cis2017-mini-exchange.herokuapp.com/evaluate/result', {
-    method: 'POST',
-    body: JSON.stringify({
-      runId,
-      result,
-    }),
-  })
-  .then(result => result.text())
-  .then((result) => {
-    console.log(result);
-    res.json(result);
-  });
-  */
 };
