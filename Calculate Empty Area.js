@@ -76,12 +76,18 @@ function find_angle(Ax,Ay,Bx,By,Cx,Cy) {
     return Math.acos((BC*BC+AB*AB-AC*AC)/(2*BC*AB));
 }
    if (c.x > x0 && c.x<x1 && c.y < y0 && c.y1 > y0 && c.y1 < y1){
-     var AX = Math.sqrt(c.r*c.r-(x0-c.x)*(x0-c.x));
+     var AX = Math.sqrt(c.r*c.r-(y0-c.y)*(y0-c.y));
      var area_traingle = AX*(x0-c.x);
      var angle= find_angle(c.x-AX,y0,c.x,c.y,c.x+AX,y0);
      res.json(s-(Math.round((Math.PI * c.r * c.r*angle/(2*Math.PI)) * 100) / 100-area_traingle));
     return;
   }
-
+    if (c.x > x0 && c.x<x1 && c.y > y1 && c.y0 < y1 && c.y0>y0){
+     var AX = Math.sqrt(c.r*c.r-(c.y-y1)*(c.y-y1));
+     var area_traingle = AX*(c.y-y1);
+     var angle= find_angle(c.x-AX,y1,c.x,c.y,c.x+AX,y1);
+     res.json(s-(Math.round((Math.PI * c.r * c.r*angle/(2*Math.PI)) * 100) / 100-area_traingle));
+    return;
+  }
   res.json(s);
 };}
