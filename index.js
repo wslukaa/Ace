@@ -72,7 +72,11 @@ app.post ('/getData', function (req, res, next){
 });
 
 app.post('/trainPlanner',trainPlanner);
-app.post('/sort', sort);
+
+app.post('/sort', function (req, res, next){
+  storage = req.body;
+  res.json (sort (req.body));
+});
 
 app.post('/releaseSchedule', releaseSchedule);
 

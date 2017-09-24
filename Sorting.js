@@ -1,20 +1,20 @@
 const _ = require('lodash');
 var ts = require ('timsort')
 
-module.exports = function(req, res) {
-  var numbers = req.body;
+module.exports = function (input) {
+  var numbers = input;
   var map = {};
   var arr = [];
   var resArr = [];
   var i;
 
-  for (i in req.body){
-  	if (req.body [i] in map){
-  		map [req.body [i]] += 1;
+  for (i in numbers){
+  	if (numbers [i] in map){
+  		map [numbers [i]] += 1;
   	}
   	else{
-  		map [req.body [i]] = 1;	
-  		arr.push (req.body [i]);
+  		map [numbers [i]] = 1;	
+  		arr.push (numbers [i]);
   	}
   }
   console.log (i);
@@ -37,5 +37,6 @@ module.exports = function(req, res) {
   			resArr.push (num);
   		}
   }
-  res.json(resArr);
+  
+  return (resArr);
 }
