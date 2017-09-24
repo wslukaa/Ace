@@ -92,6 +92,7 @@ exports.result = function (input){
 		raceno = entry.racedate + ":" + entry.raceno;
 
 		var id = jockeyDict [entry.jockeycode]
+		// var id = entry.jockeycode
 		var rank = parseInt (entry.Placing);
 
 		// if (parseInt (entry.racedate.substring (0,4)) > 2016 && parseInt (entry.racedate.substring (5, 7)) > 11){
@@ -245,15 +246,16 @@ exports.result = function (input){
 		candidates [raceno] = [];
 		for (var j = minPlacing; j <= maxPlacing; j++){
 			if (j in q3Storage.raceno_G [raceno]){
-				candidates[raceno].push (j + ":" + q3Storage.raceno_G [raceno][j]);
-				counter ++;
+				for (k in q3Storage.raceno_G [raceno][j]){
+					candidates[raceno].push (j + ":" + q3Storage.raceno_G [raceno][j][k]);
+					counter ++;
+				}
 			}
 		}
 	}
 	console.log (minPlacing);
 	console.log (maxPlacing);
 	console.log ("235" + ":" + counter);
-
 
 //  ------------------ Q3 Post Processing -------------------
 

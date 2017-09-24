@@ -19,7 +19,8 @@
     "mathjs": "^3.16.3",
     "mongodb-bluebird": "^0.1.2",
     "node-fetch": "^1.7.3",
-    "raw-body": "^2.3.2"
+    "raw-body": "^2.3.2",
+    "timsort": "^0.3.0"
   },
   "devDependencies": {
     "request": "^2.81.0",
