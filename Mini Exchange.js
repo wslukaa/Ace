@@ -22,14 +22,15 @@ module.exports = (req, res) => {
   const message = req.body;
   mongo.connect('mongodb://wufan:123456@ds141434.mlab.com:41434/codeitsuisse')
   .then((mongo) => {
-    console.log(message);
     const Message = mongo.collection('message');
     return Message.insert(message);
   })
   .then(() => {
+    console.log(message);
     res.json('');
   })
   .catch((err) => {
+    console.log(err);
     res.json('');
   });
   /*
