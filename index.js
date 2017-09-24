@@ -14,6 +14,8 @@ const stringComp = require ('./StringCompression2');
 
 const calculateEmptyArea = require('./Calculate Empty Area');
 
+const miniExchange = require('./Mini Exchange');
+
 const warehouseKeeper = require('./Warehouse keeper');
 
 const app = express();
@@ -73,5 +75,7 @@ app.post('/stringcompression/LZW', stringComp.LZW);
 app.post('/stringcompression/WDE', stringComp.WDE);
 
 app.post('/calculateemptyarea', calculateEmptyArea);
+
+app.post('/mini-exchange', miniExchange);
 
 app.post('/warehouse-keeper/game-start', warehouseKeeper);
