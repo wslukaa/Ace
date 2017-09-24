@@ -2,42 +2,47 @@ const _ = require('lodash');
 var ts = require ('timsort')
 
 module.exports = function (input) {
-  var quickSort = (function () {
+  var heapSort = (function () {
+    function heapify(array, index, heapSize) {
+        var left = 2 * index + 1,
+            right = 2 * index + 2,
+            largest = index;
+     
+        if (left < heapSize && array[left] > array[index])
+            largest = left;
 
-    function partition(array, left, right) {
-        var cmp = array[right - 1],
-            minEnd = left,
-            maxEnd;
-        for (maxEnd = left; maxEnd < right - 1; maxEnd += 1) {
-            if (array[maxEnd] <= cmp) {
-                swap(array, maxEnd, minEnd);
-                minEnd += 1;
-            }
+        if (right < heapSize && array[right] > array[largest])
+            largest = right;
+     
+        if (largest !== index) {
+            var temp = array[index];
+            array[index] = array[largest];
+            array[largest] = temp;
+            heapify(array, largest, heapSize);
         }
-        swap(array, minEnd, right - 1);
-        return minEnd;
     }
 
-    function swap(array, i, j) {
-        var temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-        return array;
-    }
-    
-    function quickSort(array, left, right) {
-        if (left < right) {
-            var p = partition(array, left, right);
-            quickSort(array, left, p);
-            quickSort(array, p + 1, right);
+    function buildMaxHeap(array) {
+        for (var i = Math.floor(array.length / 2); i >= 0; i -= 1) {
+            heapify(array, i, array.length);
         }
         return array;
     }
 
     return function (array) {
-        return quickSort(array, 0, array.length);
+        var size = array.length,
+            temp;
+        buildMaxHeap(array);
+        for (var i = array.length - 1; i > 0; i -= 1) {
+            temp = array[0];
+            array[0] = array[i];
+            array[i] = temp;
+            size -= 1;
+            heapify(array, 0, size);
+        }
+        return array;
     };
 }());
 
-  return quickSort (input);
+  return heapSort (input);
 }
