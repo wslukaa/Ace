@@ -20,13 +20,18 @@ const dealWithMessages = (messages) => {
 
 module.exports = (req, res) => {
   const message = req.body;
+  _.each(Object.keys(message), (key) => {
+    if (key.indexOf('.') !== -1) {
+      message[key.replace('.', '\u002e')] = message[key];
+      delete message[key];
+    }
+  });
   mongo.connect('mongodb://wufan:123456@ds141434.mlab.com:41434/codeitsuisse')
   .then((mongo) => {
     const Message = mongo.collection('message');
     return Message.insert(message);
   })
   .then(() => {
-    console.log(message);
     res.json('');
   })
   .catch((err) => {
