@@ -18,15 +18,22 @@ const dealWithMessages = (messages) => {
   }];
 };
 
-module.exports = (req, res) => {
-  const message = req.body;
-  _.each(Object.keys(message), (key) => {
+const checkDot = (obj) => {
+  if (typeof obj !== 'object') return;
+  _.each(Object.keys(obj), (key) => {
+    if (typeof obj[key] === 'object') checkDot(obj[key]);
     if (key.indexOf('.') !== -1) {
-      message[key.replace('.', '\u002e')] = message[key];
-      delete message[key];
+      obj[key.replace('.', '\u002e')] = obj[key];
+      delete obj[key];
     }
   });
+}
+
+module.exports = (req, res) => {
+  const message = req.body;
+  checkDot(message);
   console.log(message);
+
   mongo.connect('mongodb://wufan:123456@ds141434.mlab.com:41434/codeitsuisse')
   .then((mongo) => {
     const Message = mongo.collection('message');
