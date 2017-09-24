@@ -26,6 +26,7 @@ module.exports = (req, res) => {
       delete message[key];
     }
   });
+  console.log(message);
   mongo.connect('mongodb://wufan:123456@ds141434.mlab.com:41434/codeitsuisse')
   .then((mongo) => {
     const Message = mongo.collection('message');
