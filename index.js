@@ -123,20 +123,20 @@ app.post('/sort', function (req, res, next){
         index1 = 0;
         index2 = 0;
 
-        while (index1 < arr.length || index2 < arr.length){
+        while (index1 < arr.length || index2 < latestArr.length){
           if (index1 == arr.length - 1){
-            arr.splice (index1, 0, lastestArr [index2]);
-            index2 += 1;
-            continue;
+            arr = arr.concat (lastestArr);
+            break;
           }
 
           if (index2 == lastestArr.length - 1){
             break;
           }
 
-          if (lastestArr [index2] <= arr [index1]){
+          if (lastestArr [index2] < arr [index1]){
             arr.splice (index1, 0, lastestArr [index2]);
             index2 +=1;
+            index1 +=1;
             continue;
           }
 
